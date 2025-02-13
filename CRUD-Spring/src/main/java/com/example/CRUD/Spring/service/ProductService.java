@@ -35,4 +35,20 @@ public class ProductService {
         pr.deleteById(id);
         return "delete success";
     }
+
+    public Product updateProduct(Long id, Product prod) {
+        Optional<Product> p = pr.findById(id);
+
+        if(p.isPresent()){
+            Product pro = p.get();
+            pro.setName(prod.getName());
+            pro.setPrice(prod.getPrice());
+            pro.setExpiry_date(prod.getExpiry_date());
+
+            return pr.save(pro);
+        }
+        else{
+            return null;
+        }
+    }
 }
